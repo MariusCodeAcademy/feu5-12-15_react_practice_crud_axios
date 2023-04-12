@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initAuthState = {
-  email: null,
+  email: 'James@Band.com',
   token: null,
   isLoggedIn: false,
 };

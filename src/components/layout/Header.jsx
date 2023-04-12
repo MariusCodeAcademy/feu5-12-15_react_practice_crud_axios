@@ -43,6 +43,8 @@ const navData = [
 
 function Header() {
   const ctx = useAuthContext();
+  // redux isLoggedIn !!!!
+
   // console.log('ctx ===', ctx);
   // console.log('isLoggedIn ===', isLoggedIn);
   return (

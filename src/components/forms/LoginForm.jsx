@@ -51,6 +51,7 @@ function LoginForm() {
         const token = resp.data.token;
         const email = loginObj.email;
         authCtx.login(token, email);
+        // redux login
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);
