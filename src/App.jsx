@@ -10,13 +10,21 @@ import NewPostPage from './pages/NewPostPage';
 import SinglePostPage from './pages/SinglePostPage';
 import { useAuthContext } from './store/AuthProvider';
 import NotAllowed from './pages/NotAllowed';
+import Alert from './components/ui/Alert';
+import { useSelector } from 'react-redux';
 
 function App() {
   // App.jsx prideti dinamini route SinglePostPage
+  const show = useSelector((state) => state.ui.show);
+  const type = useSelector((state) => state.ui.type);
+  const msg = useSelector((state) => state.ui.msg);
+
   const authCtx = useAuthContext();
   return (
     <div className="">
       <Header />
+      {show && <Alert type={type}>{msg}</Alert>}
+
       <Routes>
         <Route path={'/'} element={<HomePage />} />
         <Route

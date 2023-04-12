@@ -7,7 +7,7 @@ import Spinner from '../components/ui/Spinner';
 import { useSelector } from 'react-redux';
 
 function HomePage() {
-  const emailRedux = useSelector((state) => state.email);
+  const emailRedux = useSelector((state) => state.auth.email);
   return (
     <Container>
       <Grid>

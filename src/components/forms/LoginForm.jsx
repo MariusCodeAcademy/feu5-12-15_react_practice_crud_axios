@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import InputField from '../ui/InputComps';
 import { useAuthContext } from '../../store/AuthProvider';
+import { useDispatch } from 'react-redux';
+import { authActions, uiActions } from '../../store';
 
 const url = 'https://reqres.in/api/login';
 
@@ -19,6 +21,7 @@ const inputsData = [
 ];
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const authCtx = useAuthContext();
   // console.log('authCtx ===', authCtx);
   const [beError, setBeError] = useState('');
@@ -50,8 +53,10 @@ function LoginForm() {
         // irasom i contexta email, token
         const token = resp.data.token;
         const email = loginObj.email;
-        authCtx.login(token, email);
+        // authCtx.login(token, email);
         // redux login
+        dispatch(authActions.login({ token, email }));
+        dispatch(uiActions.showSuccess());
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);

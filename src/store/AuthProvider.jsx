@@ -50,13 +50,14 @@ function AuthProvider({ children }) {
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka
 
-  const authCtx = {
+  let authCtx = {
     token,
     email,
     login,
     logout,
     isLoggedIn,
   };
+  authCtx = {};
   return (
     <AuthContext.Provider value={authCtx}>{children}</AuthContext.Provider>
   );

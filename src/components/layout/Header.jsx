@@ -2,6 +2,8 @@ import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuthContext } from '../../store/AuthProvider';
 import Button from '../ui/Button.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store';
 
 const StyledHeader = styled.header`
   background-color: #333;
@@ -42,7 +44,9 @@ const navData = [
 ];
 
 function Header() {
-  const ctx = useAuthContext();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const email = useSelector((state) => state.email);
+  const dispach = useDispatch();
   // redux isLoggedIn !!!!
 
   // console.log('ctx ===', ctx);
@@ -56,7 +60,7 @@ function Header() {
               {title}
             </SiteLink>
           ))}
-          {ctx.isLoggedIn && (
+          {isLoggedIn && (
             <>
               <SiteLink end to={'/posts'}>
                 Posts
@@ -66,11 +70,13 @@ function Header() {
           )}
         </Nav>
         <Nav>
-          {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
-          {ctx.isLoggedIn && (
+          {!isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
+          {isLoggedIn && (
             <Link to={'/'}>
-              user: <span>{ctx.email}</span>
-              <Button onClick={ctx.logout}>Loguot</Button>
+              user: <span>{email}</span>
+              <Button onClick={() => dispach(authActions.logout())}>
+                Loguot
+              </Button>
             </Link>
           )}
         </Nav>

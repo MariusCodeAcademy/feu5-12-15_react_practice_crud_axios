@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initAuthState = {
-  email: 'James@Band.com',
+  email: null,
   token: null,
   isLoggedIn: false,
 };
@@ -23,9 +23,24 @@ const authSlice = createSlice({
   },
 });
 
-const store = configureStore({
-  reducer: authSlice.reducer,
+const uiSlice = createSlice({
+  name: 'ui',
+  initialState: { type: 'success', msg: 'Login success', show: true },
+  reducers: {
+    showSuccess(state) {
+      state.show = true;
+    },
+    showError() {},
+  },
 });
 
+const store = configureStore({
+  reducer: {
+    auth: authSlice.reducer,
+    ui: uiSlice.reducer,
+  },
+});
+
+export const uiActions = uiSlice.actions;
 export const authActions = authSlice.actions;
 export default store;

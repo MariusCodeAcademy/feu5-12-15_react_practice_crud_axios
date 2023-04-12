@@ -29,6 +29,7 @@ const CloseButton = styled.button`
 
 const Alert = ({ type = 'info', children }) => {
   const [show, setShow] = useState(true);
+  // dispach from redux
 
   if (!show) {
     return null;
